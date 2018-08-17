@@ -1,0 +1,24 @@
+<%= form_for(@report) do |f| %>
+<% if @report.errors.any? %>
+	<div id="error_explantion">
+		<ul>
+			<% @report.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<h4>Title</h4>
+<%= f.text_field :title,class: "book_title" %>
+
+<h4>Body</h4>
+<%= f.text_area :body,class: "book_body" %>
+<br>
+<%= f.submit "Update Book" %>
+
+<% end %>
+
+
+<%= link_to "Show", report_path(@report),class: "show_#{@report.id}" %>
+<%= link_to "Back", reports_path,class: "back" %>

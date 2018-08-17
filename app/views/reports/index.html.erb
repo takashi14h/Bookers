@@ -1,0 +1,52 @@
+<h2>Books</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @reports.each do |report| %>
+		<tr>
+			<td>
+				<%= report.title %>
+			</td>
+			<td>
+				<%= report.body %>
+			</td>
+			<td>
+				<%= link_to "Show", report_path(report.id),class: "show_#{report.id}" %>
+				<%= link_to "Edit", edit_report_path(report.id),class: "edit_#{report.id}" %>
+				<%= link_to "Destroy", report_path(report.id),class: "destroy_#{report.id}", method: :delete, "data-confirm" => "Are you sure?" %>
+			</td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+
+
+<h2>New book</h2>
+<%= form_for(@report) do |f| %>
+<% if @report.errors.any? %>
+	<div id="error_explantion">
+		<ul>
+			<% @report.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+	<h4>Title</h4>
+	<%= f.text_field :title,class: "book_title" %>
+
+	<h4>Body</h4>
+	<%= f.text_area :body,class: "book_body" %>
+
+	<div>
+		<%= f.submit "Create Book" %>
+	</div>
+<% end %>
